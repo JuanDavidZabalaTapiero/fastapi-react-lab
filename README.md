@@ -80,3 +80,32 @@ alembic upgrade head
 ```
 
 Esto aplicará todas las migraciones pendientes a la base de datos.
+
+# Ejecutar FastAPI
+
+Desde la carpeta `backend`:
+
+```cmd
+cd backend
+uvicorn app.main:app --reload
+```
+
+El servidor estará disponible en:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Documentación de la API
+
+FastAPI genera automáticamente documentación interactiva:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+También está disponible la documentación alternativa:
+
+```text
+http://127.0.0.1:8000/redoc
+```
