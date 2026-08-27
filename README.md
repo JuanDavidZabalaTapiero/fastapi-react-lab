@@ -109,3 +109,28 @@ También está disponible la documentación alternativa:
 ```text
 http://127.0.0.1:8000/redoc
 ```
+
+# Ejecutar React
+
+Desde la carpeta `frontend`:
+
+```cmd
+cd frontend
+npm install
+npm run dev
+```
+
+El servidor de desarrollo estará disponible en:
+
+```text
+http://localhost:5173
+```
+
+### Tecnologías
+
+El frontend utiliza:
+
+- **React**
+- **TypeScript**
+- **Vite**
+- **ESLint**
