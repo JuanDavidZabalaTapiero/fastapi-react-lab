@@ -19,41 +19,56 @@ Proyecto de prueba para aprender y experimentar con **FastAPI**, **React** y **P
 
 Importante ingresar al directorio `backend` para cualquier operación:
 
-`cd backend`
+```cmd
+cd backend
+```
 
 ## Entorno virtual
 
 Crear:
 
-`python -m venv .venv`
+```cmd
+python -m venv .venv
+```
 
 Activar:
 
-`.\.venv\Scripts\activate`
+```cmd
+.venv\Scripts\activate
+```
 
 ## Dependencias
 
-`pip install -r requirements.txt`
+```cmd
+pip install -r requirements.txt
+```
 
 ## Variables de entorno
 
 Crear un archivo `.env`:
 
-`DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name`
+```.env
+DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name
+TEST_DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name_test
+```
 
-`TEST_DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name_test`
-
-## FastAPI
+## 💚 FastAPI
 
 Levantar el servicio:
 
-`uvicorn app.main:app --reload`
+```cmd
+uvicorn app.main:app --reload
+```
 
-## Base de datos
+## 🗄️ Base de datos
 
 Aplicar migraciones:
 
-`alembic upgrade head`
+```cmd
+alembic upgrade head
+```
+
+> Puedes modificar `backend/migrations/env.py` para que aplique las migraciones a tu base de datos de pruebas
 
 ---
 
@@ -61,14 +76,20 @@ Aplicar migraciones:
 
 Importante ingresar al directorio `frontend` para cualquier operación:
 
-`cd frontend`
+```cmd
+cd frontend
+```
 
 ## Dependencias
 
-`npm install`
+```cmd
+npm install
+```
 
-## React
+## ⚛️ React
 
 Levantar el servicio:
 
-`npm run dev`
+```cmd
+npm run dev
+```
