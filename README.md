@@ -1,136 +1,74 @@
-# FastAPI + React Lab
+# 🚀 FastAPI + React Lab
 
 Proyecto de prueba para aprender y experimentar con **FastAPI**, **React** y **PostgreSQL**.
 
 ---
 
-# Docker
+# 🐋 Docker
 
-El archivo `compose.yml` configura los siguientes servicios:
+`compose.yml`:
 
-- **PostgreSQL**: motor de base de datos.
-- **pgAdmin**: gestor visual para administrar PostgreSQL.
+- PostgreSQL
+- pgAdmin: gestor visual de PostgreSQL
 
-> Si no necesitas pgAdmin, puedes eliminar su servicio de `compose.yml`.
-
-## Iniciar los servicios
-
-Desde la carpeta donde se encuentra `compose.yml`:
-
-```
-docker compose up -d
-```
-
-### PostgreSQL
-
-- Host: `localhost`
-- Port: `5432`
-- User: `postgres`
-- Password: `postgres`
-- Database: `fastapi_react_lab`
-
-### pgAdmin
-
-Accede desde el navegador:
-
-```
-http://localhost:5050
-```
-
-Credenciales:
-
-- Email: `admin@example.com`
-- Password: `admin`
+> Puedes modificar las credenciales si quieres.
 
 ---
 
-# Migraciones
+# ⚙️ Backend
 
-Las migraciones se gestionan utilizando **Alembic** y **SQLAlchemy**.
+Importante ingresar al directorio `backend` para cualquier operación:
 
-## Requisitos
+`cd backend`
 
-Antes de aplicar las migraciones debes:
+## Entorno virtual
 
-1. Tener Python instalado.
-2. Tener un entorno virtual creado y activado.
-3. Tener instaladas las dependencias del proyecto.
-4. Tener PostgreSQL ejecutándose mediante Docker.
+Crear:
 
-Las dependencias se pueden instalar con:
+`python -m venv .venv`
 
-```
-pip install -r requirements.txt
-```
+Activar:
 
-> La base de datos `fastapi_react_lab` se crea automáticamente por PostgreSQL al inicializar el contenedor por primera vez.
+`.\.venv\Scripts\activate`
 
-## Aplicar migraciones
+## Dependencias
 
-Desde la carpeta `backend`:
+`pip install -r requirements.txt`
 
-```
-cd backend
-```
+## Variables de entorno
 
-Ejecuta:
+Crear un archivo `.env`:
 
-```
-alembic upgrade head
-```
+`DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name`
 
-Esto aplicará todas las migraciones pendientes a la base de datos.
+`TEST_DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name_test`
 
-# Ejecutar FastAPI
+## FastAPI
 
-Desde la carpeta `backend`:
+Levantar el servicio:
 
-```cmd
-cd backend
-uvicorn app.main:app --reload
-```
+`uvicorn app.main:app --reload`
 
-El servidor estará disponible en:
+## Base de datos
 
-```text
-http://127.0.0.1:8000
-```
+Aplicar migraciones:
 
-### Documentación de la API
+`alembic upgrade head`
 
-FastAPI genera automáticamente documentación interactiva:
+---
 
-```text
-http://127.0.0.1:8000/docs
-```
+# 💻 Frontend
 
-También está disponible la documentación alternativa:
+Importante ingresar al directorio `frontend` para cualquier operación:
 
-```text
-http://127.0.0.1:8000/redoc
-```
+`cd frontend`
 
-# Ejecutar React
+## Dependencias
 
-Desde la carpeta `frontend`:
+`npm install`
 
-```cmd
-cd frontend
-npm install
-npm run dev
-```
+## React
 
-El servidor de desarrollo estará disponible en:
+Levantar el servicio:
 
-```text
-http://localhost:5173
-```
-
-### Tecnologías
-
-El frontend utiliza:
-
-- **React**
-- **TypeScript**
-- **Vite**
-- **ESLint**
+`npm run dev`
