@@ -31,6 +31,10 @@ export async function getUsers() {
   return request("/users/");
 }
 
+export async function getUser(id: number) {
+  return request(`/users/${id}`);
+}
+
 export async function updateUser(id: number, name: string) {
   return request(`/users/${id}`, {
     method: "PUT",

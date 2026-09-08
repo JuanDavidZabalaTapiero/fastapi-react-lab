@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { getUsers } from "../api";
 
 function Users() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<{ id: number; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -68,6 +69,7 @@ function Users() {
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
+                  onClick={() => navigate(`/users/${user.id}/edit`)}
                   className="h-9 px-3 text-sm font-medium text-neutral-200 bg-neutral-800 rounded-lg hover:bg-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 >
                   Editar

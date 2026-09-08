@@ -17,6 +17,12 @@ def get_all(service=Depends(create_user_service)):  # noqa
     return {"users": users}
 
 
+@router.get("/{user_id}", status_code=200)
+def get(user_id: int, service=Depends(create_user_service)):  # noqa
+    user = service.get(user_id)
+    return {"user": {"id": user.id, "name": user.name}}
+
+
 @router.put("/{user_id}", status_code=200)
 def update(user_id: int, data: UserUpdate, service=Depends(create_user_service)):  # noqa
     service.update(user_id, name=data.name)
