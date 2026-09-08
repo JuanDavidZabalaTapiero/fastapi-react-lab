@@ -1,6 +1,31 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { getUsers } from "../api";
 
 function Users() {
+  const [users, setUsers] = useState<{ id: number; name: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadUsers = async () => {
+    try {
+      const response = await getUsers();
+      setUsers(response.users);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Ocurrió un error inesperado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
   return (
     <section className="space-y-6">
       <header className="flex items-center justify-between border-b border-neutral-800 pb-4">
@@ -21,10 +46,43 @@ function Users() {
         </Link>
       </header>
 
-      {/* Contenedor preparado para la lista de usuarios */}
-      <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-8 text-center text-sm text-neutral-500">
-        Aún no hay usuarios para mostrar.
-      </div>
+      {loading ? (
+        <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-8 text-center text-sm text-neutral-500">
+          Cargando usuarios...
+        </div>
+      ) : users.length === 0 ? (
+        <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-8 text-center text-sm text-neutral-500">
+          Aún no hay usuarios para mostrar.
+        </div>
+      ) : (
+        <ul className="rounded-xl border border-neutral-800 bg-neutral-900 divide-y divide-neutral-800 overflow-hidden">
+          {users.map((user) => (
+            <li
+              key={user.id}
+              className="flex items-center justify-between gap-4 px-4 py-3"
+            >
+              <p className="text-sm font-medium text-neutral-100">
+                {user.name}
+              </p>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  className="h-9 px-3 text-sm font-medium text-neutral-200 bg-neutral-800 rounded-lg hover:bg-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  className="h-9 px-3 text-sm font-medium text-rose-300 bg-rose-950/60 rounded-lg hover:bg-rose-950 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
