@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { getUsers } from "../api";
+import { getUsers, deleteUser } from "../api";
 
 function Users() {
   const navigate = useNavigate();
@@ -20,6 +20,21 @@ function Users() {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteUser(id);
+      // Remueve el usuario del estado para refrescar la lista en pantalla
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+      toast.success("Usuario eliminado correctamente");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("No se pudo eliminar el usuario");
+      }
     }
   };
 
@@ -76,7 +91,8 @@ function Users() {
                 </button>
                 <button
                   type="button"
-                  className="h-9 px-3 text-sm font-medium text-rose-300 bg-rose-950/60 rounded-lg hover:bg-rose-950 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                  onClick={() => handleDelete(user.id)}
+                  className="h-9 rounded-lg bg-rose-950/60 px-3 text-sm font-medium text-rose-300 transition-colors hover:bg-rose-950 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
                 >
                   Eliminar
                 </button>

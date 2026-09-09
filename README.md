@@ -4,6 +4,22 @@ Proyecto de prueba para aprender y experimentar con **FastAPI**, **React** y **P
 
 ---
 
+# 📸 Capturas de Pantalla
+
+## 🏠 Inicio (`/`)
+
+![Inicio](docs/images/home.png)
+
+## 👥 Lista de Usuarios (`/users`)
+
+![Lista de Usuarios](docs/images/users.png)
+
+## ➕ Registro de Usuario (`/users/register`)
+
+![Registro de Usuario](docs/images/register.png)
+
+---
+
 # 🐋 Docker
 
 `compose.yml`:
